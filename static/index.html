@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat App</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .intro-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: linear-gradient(to bottom, #333333, #000000);
+        }
+        .intro-content h1, .intro-content p {
+            color: #ffffff;
+        }
+        .intro-content button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background: #1e88e5;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .chat-container {
+            display: none;
+            flex-direction: column;
+            height: 100vh;
+        }
+        .chat-messages {
+            height: 80%;
+            padding: 10px;
+            overflow-y: auto;
+            background: #1e1e1e;
+            border-bottom: 1px solid #444;
+        }
+        .chat-input {
+            display: flex;
+            padding: 10px;
+            background: #1e1e1e;
+            border-top: 1px solid #444;
+        }
+        .chat-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #555;
+            background: #2e2e2e;
+            color: white;
+            border-radius: 5px;
+        }
+        .chat-input button {
+            padding: 10px 20px;
+            background: #1e88e5;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        .message {
+            margin: 5px 0;
+            padding: 8px 12px;
+            border-radius: 6px;
+            max-width: 75%;
+            word-wrap: break-word;
+        }
+        .message.user {
+            background: #2e7d32;
+            align-self: flex-end;
+            color: #ffffff;
+        }
+        .message.other {
+            background: #c62828;
+            align-self: flex-start;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <div class="intro-container" id="introContainer">
+        <div class="intro-content">
+            <h1>Welcome to the Chat App</h1>
+            <p>Connect and communicate seamlessly.</p>
+            <button onclick="startChat()">Get Started</button>
+        </div>
+    </div>
+
+    <div class="chat-container" id="chatContainer">
+        <div class="chat-messages" id="chatMessages"></div>
+        <div class="chat-input">
+            <input type="text" id="messageInput" placeholder="Type your message...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        function startChat() {
+            document.getElementById('introContainer').style.display = 'none';
+            document.getElementById('chatContainer').style.display = 'flex';
+        }
+
+        function sendMessage() {
+            const input = document.getElementById("messageInput");
+            const chatMessages = document.getElementById("chatMessages");
+
+            if (input.value.trim() !== "") {
+                const messageDiv = document.createElement("div");
+                messageDiv.classList.add("message", "user");
+                messageDiv.textContent = input.value;
+                chatMessages.appendChild(messageDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+                input.value = "";
+            }
+        }
+    </script>
+</body>
+</html>
+
